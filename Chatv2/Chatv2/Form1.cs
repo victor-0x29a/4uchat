@@ -85,7 +85,7 @@ namespace Chatv2
 
         public async void ConnectToServer(object Sender, EventArgs e)
         {
-            if (datanickname.Text.Length < 1 || datanickname.Text.Length > 25)
+            if (NickName.Length < 1 || NickName.Length > 25)
             {
                 MessageBox.Show("Confira seu nickname!", AppName);
                 return;
@@ -93,9 +93,16 @@ namespace Chatv2
 
             if (SocketConnected)
             {
-                MessageBox.Show("Você já está conectado.", AppName);
+                await socket.DisconnectAsync();
+                connectbutton.Text = "Conectar";
+                connectbutton.BackColor = Color.FromArgb(128, 255, 128);
+                SocketConnected = false;
+                MessageBox.Show("Desconectado!", AppName);
                 return;
             }
+
+            connectbutton.Text = "Desconectar";
+            connectbutton.BackColor = Color.Red;
 
             await On();
         }
