@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+      "target": "es2018",
+      "lib": ["es5", "es6", "ES2021"],
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true,
+      "module": "commonjs",
+      "moduleResolution": "node",
+      "resolveJsonModule": true,
+      "allowJs": true,
+      "outDir": "./dist",
+      "esModuleInterop": true,
+      "forceConsistentCasingInFileNames": true,
+      "strict": false,
+      "noImplicitAny": true
+    },
+    "include": ["./src/*", "src/bot/commands", "src/Core/modules/chat.module.ts"],
+    "exclude": ["node_modules", "dist"],
+    "ts-node": {
+      "files": true
+    },
+    "plugins": [{"name": "dotnev"}]
+  }
