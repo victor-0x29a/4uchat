@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "dgSpecHash": "K0SXR9FnG0L4erEjj09EG6D8s0NJ9np8iYyxIn7dqlhtom9VknmqWBUH0WDQxMmETNAxlrWsDLUxnmdcWpl6Og==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\carto\\source\\repos\\Chatv2\\Chatv2\\Chatv2.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\carto\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\carto\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
+    "C:\\Users\\carto\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
+    "C:\\Users\\carto\\.nuget\\packages\\socketioclient\\3.0.8\\socketioclient.3.0.8.nupkg.sha512",
+    "C:\\Users\\carto\\.nuget\\packages\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",
+    "C:\\Users\\carto\\.nuget\\packages\\system.runtime\\4.3.0\\system.runtime.4.3.0.nupkg.sha512",
+    "C:\\Users\\carto\\.nuget\\packages\\system.text.encodings.web\\7.0.0\\system.text.encodings.web.7.0.0.nupkg.sha512",
+    "C:\\Users\\carto\\.nuget\\packages\\system.text.json\\7.0.2\\system.text.json.7.0.2.nupkg.sha512"
+  ],
+  "logs": []
+}
