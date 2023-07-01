@@ -35,6 +35,7 @@
             labelnickname = new Label();
             savebutton = new Button();
             connectbutton = new Button();
+            onlinetext = new Label();
             SuspendLayout();
             // 
             // MessageSender
@@ -116,12 +117,23 @@
             connectbutton.UseVisualStyleBackColor = false;
             connectbutton.Click += ConnectToServer;
             // 
+            // onlinetext
+            // 
+            onlinetext.AutoSize = true;
+            onlinetext.Font = new Font("Segoe UI", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
+            onlinetext.ForeColor = Color.FromArgb(128, 255, 128);
+            onlinetext.Location = new Point(717, 129);
+            onlinetext.Name = "onlinetext";
+            onlinetext.Size = new Size(0, 13);
+            onlinetext.TabIndex = 7;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             ClientSize = new Size(784, 561);
+            Controls.Add(onlinetext);
             Controls.Add(connectbutton);
             Controls.Add(savebutton);
             Controls.Add(labelnickname);
@@ -144,5 +156,6 @@
         private Label labelnickname;
         private Button savebutton;
         private Button connectbutton;
+        private Label onlinetext;
     }
 }
