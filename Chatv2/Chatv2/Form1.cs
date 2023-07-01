@@ -64,6 +64,19 @@ namespace Chatv2
                 Messages.SelectionFont = new Font(Messages.Font, FontStyle.Regular);
                 Messages.AppendText(DataSerialized.Content);
             });
+
+            socket.On("rejectNick", (data) =>
+            {
+                MessageBox.Show("Confira o nickname digitado!", AppName);
+            });
+
+            socket.On("acceptedNick", (data) =>
+            {
+                String DataSerialized = JsonConvert.DeserializeObject<String[]>(data.ToString())[0];
+                NickName = DataSerialized;
+                MessageBox.Show("Nickname alterado!", AppName);
+            });
+
             await socket.ConnectAsync();
             SocketConnected = true;
 
@@ -80,6 +93,14 @@ namespace Chatv2
             {
                 NickName = datanickname.Text;
                 MessageBox.Show("Alterações salvas.", AppName);
+            } else
+            {
+                if (datanickname.Text.Length > 25)
+                {
+                    MessageBox.Show("Confira o nick digitado.", AppName);
+                    return;
+                }
+                await socket.EmitAsync("ChangeNick", datanickname.Text);
             }
         }
 
