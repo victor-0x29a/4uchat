@@ -14,6 +14,16 @@ class MainController {
                 socket: socket
             })
 
+            socket.on("ChangeNick", (NewNick: string)=> {
+                if (NewNick.length > 25 || !NewNick) {
+                    socket.emit("rejectNick");
+                    return;
+                } 
+                const indexUser: number = rooms[0].connects.findIndex((User)=> User.socket.id === socket.id);
+                rooms[0].connects[indexUser].name = NewNick;
+                socket.emit("acceptedNick");
+            })
+
             socket.on("Message", (ContentMessage: string)=> {
                 const content = JSON.parse(ContentMessage);
                 ChatModule(socket, kernel, rooms[0], content["Content"], true);
