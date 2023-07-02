@@ -3,6 +3,7 @@ using SocketIOClient;
 using SocketIOClient.Transport;
 using System.Runtime.InteropServices;
 using System.Text.Json.Serialization;
+using System.Threading.Tasks;
 
 namespace Chatv2
 {
@@ -59,7 +60,6 @@ namespace Chatv2
 
             socket.On("MessageReceiv", (data) =>
             {
-
                 var DataReceived = data.ToString();
                 Response DataSerialized = JsonConvert.DeserializeObject<Response[]>(DataReceived)[0];
                 String Content = Environment.NewLine + DataSerialized.From + ": " + DataSerialized.Content;
@@ -87,14 +87,30 @@ namespace Chatv2
                 onlinetext.Text = DataSerialized + " online";
             });
 
-            socket.On("UserConnected", (data) => {
+            socket.On("UserConnected", (data) =>
+            {
                 String DataSerialized = JsonConvert.DeserializeObject<String[]>(data.ToString())[0];
                 Messages.AppendText(DataSerialized + " entrou na sala." + Environment.NewLine);
             });
 
-            socket.On("UserDisconnected", (data) => {
+            socket.On("UserDisconnected", (data) =>
+            {
                 String DataSerialized = JsonConvert.DeserializeObject<String[]>(data.ToString())[0];
                 Messages.AppendText(DataSerialized + " saiu da sala." + Environment.NewLine);
+            });
+
+            socket.On("UserTyping", async (data) =>
+            {
+                String SocketID = JsonConvert.DeserializeObject<String[]>(data.ToString())[1];
+                String UserName = JsonConvert.DeserializeObject<String[]>(data.ToString())[0];
+                if (SocketID != socket.Id.ToString())
+                {
+                    LabelTyping.Text = UserName + " está digitando...";
+                    await Task.Delay(1800);
+                    LabelTyping.Text = "";
+                }
+                
+
             });
 
             await socket.ConnectAsync();
@@ -125,6 +141,13 @@ namespace Chatv2
             }
         }
 
+        public async void SendTyping(object sender, EventArgs e)
+        {
+            if (SocketConnected && MessageSender.Text.Length > 2)
+            {
+                await socket.EmitAsync("Typing");
+            }
+        }
         public async void ConnectToServer(object Sender, EventArgs e)
         {
             if (NickName.Length < 1 || NickName.Length > 25)

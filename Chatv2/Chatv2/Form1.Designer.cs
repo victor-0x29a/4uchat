@@ -36,6 +36,7 @@
             connectbutton = new Button();
             onlinetext = new Label();
             Messages = new TextBox();
+            LabelTyping = new Label();
             SuspendLayout();
             // 
             // MessageSender
@@ -49,6 +50,7 @@
             MessageSender.Size = new Size(760, 54);
             MessageSender.TabIndex = 1;
             MessageSender.Text = "";
+            MessageSender.TextChanged += SendTyping;
             MessageSender.KeyDown += SendMessage;
             // 
             // datanickname
@@ -126,12 +128,24 @@
             Messages.Size = new Size(760, 265);
             Messages.TabIndex = 8;
             // 
+            // LabelTyping
+            // 
+            LabelTyping.AutoSize = true;
+            LabelTyping.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            LabelTyping.ForeColor = SystemColors.ButtonFace;
+            LabelTyping.Location = new Point(12, 465);
+            LabelTyping.Name = "LabelTyping";
+            LabelTyping.Size = new Size(0, 17);
+            LabelTyping.TabIndex = 9;
+            LabelTyping.TextAlign = ContentAlignment.TopCenter;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             ClientSize = new Size(784, 561);
+            Controls.Add(LabelTyping);
             Controls.Add(Messages);
             Controls.Add(onlinetext);
             Controls.Add(connectbutton);
@@ -156,5 +170,6 @@
         private Button connectbutton;
         private Label onlinetext;
         private TextBox Messages;
+        private Label LabelTyping;
     }
 }
