@@ -30,12 +30,12 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             MessageSender = new RichTextBox();
-            Messages = new RichTextBox();
             datanickname = new TextBox();
             labelnickname = new Label();
             savebutton = new Button();
             connectbutton = new Button();
             onlinetext = new Label();
+            Messages = new TextBox();
             SuspendLayout();
             // 
             // MessageSender
@@ -50,20 +50,6 @@
             MessageSender.TabIndex = 1;
             MessageSender.Text = "";
             MessageSender.KeyDown += SendMessage;
-            // 
-            // Messages
-            // 
-            Messages.BackColor = Color.FromArgb(64, 64, 64);
-            Messages.BorderStyle = BorderStyle.None;
-            Messages.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            Messages.ForeColor = Color.White;
-            Messages.Location = new Point(12, 154);
-            Messages.Name = "Messages";
-            Messages.ReadOnly = true;
-            Messages.ScrollBars = RichTextBoxScrollBars.Vertical;
-            Messages.Size = new Size(760, 275);
-            Messages.TabIndex = 2;
-            Messages.Text = "";
             // 
             // datanickname
             // 
@@ -127,18 +113,31 @@
             onlinetext.Size = new Size(0, 13);
             onlinetext.TabIndex = 7;
             // 
+            // Messages
+            // 
+            Messages.BackColor = Color.FromArgb(64, 64, 64);
+            Messages.BorderStyle = BorderStyle.None;
+            Messages.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            Messages.ForeColor = SystemColors.Window;
+            Messages.Location = new Point(12, 154);
+            Messages.Multiline = true;
+            Messages.Name = "Messages";
+            Messages.ReadOnly = true;
+            Messages.Size = new Size(760, 265);
+            Messages.TabIndex = 8;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             ClientSize = new Size(784, 561);
+            Controls.Add(Messages);
             Controls.Add(onlinetext);
             Controls.Add(connectbutton);
             Controls.Add(savebutton);
             Controls.Add(labelnickname);
             Controls.Add(datanickname);
-            Controls.Add(Messages);
             Controls.Add(MessageSender);
             ForeColor = SystemColors.ControlLightLight;
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
@@ -151,11 +150,11 @@
 
         #endregion
         private RichTextBox MessageSender;
-        private RichTextBox Messages;
         private TextBox datanickname;
         private Label labelnickname;
         private Button savebutton;
         private Button connectbutton;
         private Label onlinetext;
+        private TextBox Messages;
     }
 }
