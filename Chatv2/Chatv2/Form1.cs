@@ -16,6 +16,7 @@ namespace Chatv2
             public String Content;
         }
 
+
         private readonly static string addressServer = "127.0.0.1:1337";
         private static string websocketAddress = "http://" + addressServer;
         private static SocketIO socket;
@@ -26,7 +27,7 @@ namespace Chatv2
 
         private static void OnConnectedHandler(object sender, EventArgs e)
         {
-            MessageBox.Show("Conectado!", "W3APP");
+            //MessageBox.Show("Conectado!", "W3APP");
         }
 
         public async void SendMessage(object sender, KeyEventArgs e)
@@ -37,6 +38,8 @@ namespace Chatv2
                 string json = JsonConvert.SerializeObject(objeto);
                 await socket.EmitAsync("Message", json);
                 MessageSender.Text = "";
+                String[] Nothing = { "" };
+                MessageSender.Lines = Nothing;
             }
         }
 
@@ -59,11 +62,11 @@ namespace Chatv2
 
                 var DataReceived = data.ToString();
                 Response DataSerialized = JsonConvert.DeserializeObject<Response[]>(DataReceived)[0];
-                Messages.SelectionFont = new Font(Messages.Font, FontStyle.Bold);
+                String Content = Environment.NewLine + DataSerialized.From + ": " + DataSerialized.Content;
+                Messages.Font = new Font(Messages.Font, FontStyle.Bold);
                 Messages.AppendText(DataSerialized.From + "  ");
-                Messages.SelectionFont = new Font(Messages.Font, FontStyle.Regular);
-                Messages.AppendText(DataSerialized.Content);
-                Messages.AppendText(Environment.NewLine);
+                Messages.Font = new Font(Messages.Font, FontStyle.Regular);
+                Messages.AppendText(DataSerialized.Content + Environment.NewLine);
             });
 
             socket.On("rejectNick", (data) =>
@@ -78,9 +81,20 @@ namespace Chatv2
                 MessageBox.Show("Nickname alterado!", AppName);
             });
 
-            socket.On("UsersConnecteds", (data) => {
+            socket.On("UsersConnecteds", (data) =>
+            {
                 String DataSerialized = JsonConvert.DeserializeObject<String[]>(data.ToString())[0];
                 onlinetext.Text = DataSerialized + " online";
+            });
+
+            socket.On("UserConnected", (data) => {
+                String DataSerialized = JsonConvert.DeserializeObject<String[]>(data.ToString())[0];
+                Messages.AppendText(DataSerialized + " entrou na sala." + Environment.NewLine);
+            });
+
+            socket.On("UserDisconnected", (data) => {
+                String DataSerialized = JsonConvert.DeserializeObject<String[]>(data.ToString())[0];
+                Messages.AppendText(DataSerialized + " saiu da sala." + Environment.NewLine);
             });
 
             await socket.ConnectAsync();
@@ -125,6 +139,7 @@ namespace Chatv2
                 connectbutton.Text = "Conectar";
                 connectbutton.BackColor = Color.FromArgb(128, 255, 128);
                 SocketConnected = false;
+                onlinetext.Text = "";
                 MessageBox.Show("Desconectado!", AppName);
                 return;
             }
